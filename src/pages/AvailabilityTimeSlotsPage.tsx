@@ -1,15 +1,13 @@
-import {Box, Heading} from "@chakra-ui/react";
-import AvailabilityTimeSlotsForm from "../components/AvailabilityTimeSlotsForm.tsx";
+import { Box, Heading } from '@chakra-ui/react';
+import AvailabilityTimeSlotsForm from '../components/AvailabilityTimeSlotsForm.tsx';
 
 const AvailabilityTimeSlotsPage = () => {
-    return (
-        <Box>
-            <Heading textAlign="center">
-                AvailabilityTimeSlotsPage
-            </Heading>
-            <AvailabilityTimeSlotsForm/>
-        </Box>
-    );
+  return (
+    <Box>
+      <Heading textAlign='center'>AvailabilityTimeSlotsPage</Heading>
+      <AvailabilityTimeSlotsForm />
+    </Box>
+  );
 };
 
 export default AvailabilityTimeSlotsPage;
