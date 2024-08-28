@@ -1,15 +1,14 @@
 import { Grid, GridItem } from '@chakra-ui/react';
-import AvailabilityTimeSlots from "./AvailabilityTimeSlots.tsx";
+import AvailabilityTimeSlotsPage from "../pages/AvailabilityTimeSlotsPage.tsx";
 
 const ResponsiveLayout = () => {
     return (
         <Grid
-            // Definindo as áreas da grade para diferentes tamanhos de tela
+
             templateAreas={{
-                base: `'nav' 'main' `, // Layout para telas pequenas
-                md: `'nav nav' 'main main'`, // Layout para telas médias e maiores
+                base: `'nav' 'main' `,
+                md: `'nav nav' 'main main'`,
             }}
-            // Definindo as colunas da grade para diferentes tamanhos de tela
             gridTemplateColumns={{ base: '1fr', md: '200px 1fr' }}
             gridTemplateRows={{ base: '1fr', md: '55px 1fr' }}
             gap='1'
@@ -19,7 +18,7 @@ const ResponsiveLayout = () => {
                 Navbar
             </GridItem>
             <GridItem area='main' padding='4'>
-                <AvailabilityTimeSlots />
+                <AvailabilityTimeSlotsPage />
             </GridItem>
         </Grid>
     );
