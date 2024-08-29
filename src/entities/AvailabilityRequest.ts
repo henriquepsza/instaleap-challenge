@@ -70,7 +70,7 @@ interface Location {
 }
 
 // Interface principal para o trabalho
-interface AvailabilityForm {
+interface AvailabilityRequest {
   currency_code: string;
   start: string;
   end: string;
@@ -83,4 +83,4 @@ interface AvailabilityForm {
   job_items: JobItem[];
 }
 
-export default AvailabilityForm;
+export default AvailabilityRequest;

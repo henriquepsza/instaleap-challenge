@@ -9,7 +9,7 @@ import {
   VStack,
   HStack,
 } from '@chakra-ui/react';
-import AvailabilityForm from '../entities/AvailabilityForm.ts';
+import AvailabilityRequest from '../entities/AvailabilityRequest.ts';
 
 const AvailabilityTimeSlotsForm = () => {
   // Create refs for each form field
@@ -24,7 +24,7 @@ const AvailabilityTimeSlotsForm = () => {
 
   // Function to handle form submission
   const handleSubmit = () => {
-    const formData: AvailabilityForm = {
+    const formData: AvailabilityRequest = {
       currency_code: 'USD',
       start: '2024-09-01T08:00:00Z',
       end: '2024-09-08T08:00:00Z',
