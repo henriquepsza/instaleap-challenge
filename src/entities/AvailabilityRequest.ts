@@ -1,29 +1,24 @@
-// Interface para limites de quantidade encontrados
 interface QuantityFoundLimits {
   max: number;
   min: number;
 }
 
-// Interface para substituição de itens
-interface Replacement {
-  replacement_mode: string;
-  suggested_replacements: string[];
-}
+// interface Replacement {
+//   replacement_mode: string;
+//   suggested_replacements: string[];
+// }
+//
+// interface KitInfo {
+//   id: string;
+//   number: number;
+//   price: number;
+// }
 
-// Interface para informações do kit
-interface KitInfo {
-  id: string;
-  number: number;
-  price: number;
-}
-
-// Interface para informações de reclamação
 interface ClaimInformation {
   max_time_to_claim_in_hours: number;
   available_claim_actions: string[];
 }
 
-// Interface para atributos de um item
 interface Attributes {
   category: string;
   plu: string;
@@ -32,7 +27,6 @@ interface Attributes {
   picking_index: string;
 }
 
-// Interface para os itens do trabalho
 interface JobItem {
   id: string;
   name: string;
@@ -48,14 +42,11 @@ interface JobItem {
   price: number;
   comment: string;
   picking_time_multiplier: number;
-  replacement: Replacement;
   available_lots: string[];
-  kit_info: KitInfo;
   claim_information: ClaimInformation;
   attributes: Attributes;
 }
 
-// Interface para localização (origem e destino)
 interface Location {
   name: string;
   address: string;
@@ -69,7 +60,6 @@ interface Location {
   longitude: number;
 }
 
-// Interface principal para o trabalho
 interface AvailabilityRequest {
   currency_code: string;
   start: string;
@@ -78,6 +68,7 @@ interface AvailabilityRequest {
   minimum_slot_size: number;
   operational_models_priority: string[];
   fallback: boolean;
+  store_reference: string;
   origin: Location;
   destination: Location;
   job_items: JobItem[];

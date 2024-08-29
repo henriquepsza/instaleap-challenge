@@ -5,6 +5,7 @@ const axiosInstance = axios.create({
   baseURL: 'https://api.xandar.instaleap.io', // Replace with your API's URL if necessary
   headers: {
     'Content-Type': 'application/json',
+    'x-api-key': 'yoJYongi4V4m0S4LClubdyiu5nq6VIpxazcFaghi',
   },
 });
 
