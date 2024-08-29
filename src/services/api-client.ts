@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 // Create an axios instance with a base URL and default headers
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost', // Replace with your API's URL if necessary
+  baseURL: 'https://api.xandar.instaleap.io', // Replace with your API's URL if necessary
   headers: {
     'Content-Type': 'application/json',
   },
