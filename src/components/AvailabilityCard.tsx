@@ -3,7 +3,6 @@ import {
   Card,
   CardBody,
   Heading,
-  HStack,
   Text,
   Button,
   useDisclosure,
@@ -13,6 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogBody,
   AlertDialogFooter,
+  VStack,
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { AvailabilityTimeSlot } from '../entities/AvailabilityResponse.ts';
@@ -33,23 +33,17 @@ const AvailabilityTimeSlotsCard = ({ timeSlot, onSelect }: Props) => {
 
   return (
     <>
-      <Card>
+      <Card maxWidth={'250px'}>
         <CardBody>
-          <HStack justifyContent={'space-between'} marginBottom={3}>
-            <Heading fontSize={'xl'}>{timeSlot.store.name}</Heading>
-            <Text fontSize={'sm'} color={'gray.500'}>
-              {format(new Date(timeSlot.from), 'PPpp')} -{' '}
-              {format(new Date(timeSlot.to), 'PPpp')}
-            </Text>
-          </HStack>
-          <HStack justifyContent={'space-between'}>
-            <Text fontSize={'sm'}>
-              Operational Model: {timeSlot.operational_model}
-            </Text>
-            <Button colorScheme='teal' size='sm' onClick={onOpen}>
-              Select Slot
-            </Button>
-          </HStack>
+          <Heading fontSize={'xl'}>Store: {timeSlot.store.name}</Heading>
+          <VStack mt={3} mb={3} alignItems={'start'}>
+            <Text>From: {format(new Date(timeSlot.from), 'PPpp')}</Text>
+            <Text>To: {format(new Date(timeSlot.to), 'PPpp')}</Text>
+          </VStack>
+
+          <Button colorScheme='teal' size='sm' onClick={onOpen}>
+            Select Slot
+          </Button>
         </CardBody>
       </Card>
 

@@ -26,7 +26,7 @@ const JobCard = ({ job, onSelect }: Props) => {
     <Box onClick={handleClick} cursor='pointer'>
       <Card>
         <CardBody>
-          <VStack align='start' spacing={3}>
+          <VStack alignItems='start' spacing={3}>
             <Heading fontSize={'xl'}>{job.job_number}</Heading>
             <Text fontSize={'sm'}>Store: {job.store.name}</Text>
             <Text fontSize={'md'}>Recipient: {job.recipient.name}</Text>
