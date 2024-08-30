@@ -5,10 +5,12 @@ import AvailabilityRequest from '../entities/AvailabilityRequest.ts';
 import useAvailabilityTimeSlots from '../hooks/useAvailabilityTimeSlots.ts';
 import { useState } from 'react';
 import AvailabilityResponse from '../entities/AvailabilityResponse.ts';
+import useAddJob from '../hooks/useAddJob.ts';
 
 const AvailabilityTimeSlotsPage = () => {
-  const { mutate } = useAvailabilityTimeSlots();
+  const { mutate: getTimeSlots } = useAvailabilityTimeSlots();
   const [timeSlots, setTimeSlots] = useState<AvailabilityResponse>([]);
+  const { mutate: addJob } = useAddJob();
 
   // Function to handle submission
   const handleSubmit = () => {
@@ -79,7 +81,7 @@ const AvailabilityTimeSlotsPage = () => {
 
     // console.log('Form data:', formData);
     // Add logic here to send data to the API or process it as needed
-    mutate(formData, {
+    getTimeSlots(formData, {
       onSuccess: data => {
         console.log(data);
         setTimeSlots(data);
@@ -91,7 +93,41 @@ const AvailabilityTimeSlotsPage = () => {
   };
 
   const handleSelectSlot = (id: string) => {
-    console.log('Selected Slot ID:', id);
+    const jobRequest = {
+      slot_id: id,
+      client_reference: 'Order12345',
+      recipient: {
+        name: 'Jane Smith',
+        email: 'jane.smith@example.com',
+        phone_number: '+256789012345',
+      },
+      payment_info: {
+        currency_code: 'USD',
+        prices: {
+          order_value: 699.99,
+        },
+        payment: {
+          method: 'CASH',
+        },
+      },
+      add_delivery_code: true,
+      contact_less: {
+        comment: 'LeaveAtTheDoor',
+        cash_receiver: 'John Doe',
+        phone_number: '+256789098765',
+      },
+    };
+
+    console.log('jobRequest:', jobRequest);
+
+    addJob(jobRequest, {
+      onSuccess: data => {
+        console.log(data);
+      },
+      onError: err => {
+        console.log(err);
+      },
+    });
   };
 
   return (
