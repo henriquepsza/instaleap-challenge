@@ -23,6 +23,12 @@ interface Price {
   currency_code: string;
 }
 
+// Represents the attributes of an item (e.g., category, EAN code, etc.)
+interface Attributes {
+  ean: string;
+  category: string;
+}
+
 // Represents the presentation details of an item (e.g., packaging, weight, etc.)
 interface Presentation {
   quantity: number;
@@ -34,12 +40,6 @@ interface Presentation {
   weight: number;
   volume: number;
   dimensions: any[];
-}
-
-// Represents the attributes of an item (e.g., category, EAN code, etc.)
-interface Attributes {
-  ean: string;
-  category: string;
 }
 
 // Represents the details of an item in the job
@@ -59,8 +59,8 @@ interface Item {
   replaced_by: string | null;
   reference: string;
   picking_info: string | null;
-  claim_information: string | null;
-  rejection_information: string | null;
+  claim_information: any | null;
+  rejection_information: any | null;
   rejected_quantity: {
     rejected_by_driver: number;
     rejected_by_user: number;
@@ -118,6 +118,49 @@ interface DeliveryOption {
   delivery_code_tries?: number;
 }
 
+// Represents the prices including additional attributes and invoice details
+interface Prices {
+  order_value: number;
+  shipping_fee: number | null;
+  taxes: number;
+  discounts: number;
+  subtotal: number;
+  attributes: Array<{
+    name: string;
+    type: string;
+    value: number;
+  }>;
+  additional_info: any[];
+}
+
+// Represents the payment information within the job response
+interface PaymentInfo {
+  currency_code: string;
+  prices: Prices;
+  payment: {
+    id: string | null;
+    method: string;
+    method_details: string | null;
+    reference: string | null;
+    payment_status: string | null;
+    payment_status_details: string | null;
+    value: number;
+    blocking_policy: string | null;
+    metadata: any | null;
+  };
+  invoice: {
+    reference: string;
+    attachments: any[];
+  } | null;
+}
+
+// Represents the store details
+interface Store {
+  id: string;
+  name: string;
+  reference: string;
+}
+
 // Represents the main job interface combining all details
 interface JobResponse {
   id: string;
@@ -146,35 +189,8 @@ interface JobResponse {
   delivery_options: DeliveryOption[];
   job_comment: string | null;
   external_data: any | null;
-  payment_info: {
-    currency_code: string;
-    prices: {
-      order_value: number;
-      shipping_fee: number | null;
-      taxes: number;
-      discounts: number;
-      subtotal: number;
-      attributes: any[];
-      additional_info: any[];
-    };
-    payment: {
-      id: string | null;
-      method: string;
-      method_details: string | null;
-      reference: string | null;
-      payment_status: string | null;
-      payment_status_details: string | null;
-      value: number;
-      blocking_policy: string | null;
-      metadata: any | null;
-    };
-    invoice: string | null;
-  };
-  store: {
-    id: string;
-    name: string;
-    reference: string;
-  };
+  payment_info: PaymentInfo;
+  store: Store;
   is_big_order: boolean;
 }
 
