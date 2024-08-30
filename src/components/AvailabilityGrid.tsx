@@ -5,13 +5,10 @@ import AvailabilityResponse from '../entities/AvailabilityResponse.ts';
 
 interface Props {
   timeSlots: AvailabilityResponse;
+  onSelect: (id: string) => void;
 }
 
-const AvailabilityGrid = ({ timeSlots }: Props) => {
-  const handleSelectSlot = (id: string) => {
-    console.log('Selected Slot ID:', id);
-  };
-
+const AvailabilityGrid = ({ timeSlots, onSelect }: Props) => {
   if (timeSlots === null || timeSlots === undefined) return null;
 
   return (
@@ -22,7 +19,7 @@ const AvailabilityGrid = ({ timeSlots }: Props) => {
       >
         {timeSlots.map((slot, index) => (
           <AvailabilityCardContainer key={index}>
-            <AvailabilityCard timeSlot={slot} onSelect={handleSelectSlot} />
+            <AvailabilityCard timeSlot={slot} onSelect={onSelect} />
           </AvailabilityCardContainer>
         ))}
       </SimpleGrid>

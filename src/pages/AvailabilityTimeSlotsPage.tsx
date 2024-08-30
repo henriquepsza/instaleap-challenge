@@ -90,11 +90,15 @@ const AvailabilityTimeSlotsPage = () => {
     });
   };
 
+  const handleSelectSlot = (id: string) => {
+    console.log('Selected Slot ID:', id);
+  };
+
   return (
     <Box>
       <Heading textAlign='center'>AvailabilityTimeSlotsPage</Heading>
       <AvailabilityButton onSubmit={handleSubmit} />
-      <AvailabilityGrid timeSlots={timeSlots} />
+      <AvailabilityGrid timeSlots={timeSlots} onSelect={handleSelectSlot} />
     </Box>
   );
 };
