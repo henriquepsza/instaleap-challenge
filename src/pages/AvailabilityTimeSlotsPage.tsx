@@ -1,11 +1,13 @@
 import { Box, Heading } from '@chakra-ui/react';
 import AvailabilityButton from '../components/AvailabilityButton.tsx';
-import AvailabilityGrid from '../components/AvailabilityGrid.tsx';
+import GenericGrid from '../components/GenericGrid.tsx';
 import AvailabilityRequest from '../entities/AvailabilityRequest.ts';
 import useAvailabilityTimeSlots from '../hooks/useAvailabilityTimeSlots.ts';
 import { useState } from 'react';
 import AvailabilityResponse from '../entities/AvailabilityResponse.ts';
 import useAddJob from '../hooks/useAddJob.ts';
+import CardContainer from '../components/CardContainer.tsx';
+import AvailabilityCard from '../components/AvailabilityCard.tsx';
 
 const AvailabilityTimeSlotsPage = () => {
   const { mutate: getTimeSlots } = useAvailabilityTimeSlots();
@@ -134,7 +136,13 @@ const AvailabilityTimeSlotsPage = () => {
     <Box>
       <Heading textAlign='center'>Availability Time Slots Page</Heading>
       <AvailabilityButton onSubmit={handleSubmit} />
-      <AvailabilityGrid timeSlots={timeSlots} onSelect={handleSelectSlot} />
+      <GenericGrid>
+        {timeSlots.map((slot, index) => (
+          <CardContainer key={index}>
+            <AvailabilityCard timeSlot={slot} onSelect={handleSelectSlot} />
+          </CardContainer>
+        ))}
+      </GenericGrid>
     </Box>
   );
 };
