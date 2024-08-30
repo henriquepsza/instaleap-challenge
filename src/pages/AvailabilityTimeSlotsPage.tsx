@@ -120,19 +120,19 @@ const AvailabilityTimeSlotsPage = () => {
 
     console.log('jobRequest:', jobRequest);
 
-    addJob(jobRequest, {
-      onSuccess: data => {
-        console.log(data);
-      },
-      onError: err => {
-        console.log(err);
-      },
-    });
+    // addJob(jobRequest, {
+    //   onSuccess: data => {
+    //     console.log(data);
+    //   },
+    //   onError: err => {
+    //     console.log(err);
+    //   },
+    // });
   };
 
   return (
     <Box>
-      <Heading textAlign='center'>AvailabilityTimeSlotsPage</Heading>
+      <Heading textAlign='center'>Availability Time Slots Page</Heading>
       <AvailabilityButton onSubmit={handleSubmit} />
       <AvailabilityGrid timeSlots={timeSlots} onSelect={handleSelectSlot} />
     </Box>

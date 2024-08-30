@@ -2,9 +2,9 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 
 const MainPage = () => {
   return (
-    <Box>
-      <Heading>MainPage</Heading>
-      <Text>Wellcome! Select a option in the side menu</Text>
+    <Box textAlign={'center'}>
+      <Heading>Main Page</Heading>
+      <Text>Welcome! Select a option in the side menu</Text>
     </Box>
   );
 };
