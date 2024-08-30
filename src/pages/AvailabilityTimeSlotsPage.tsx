@@ -3,11 +3,14 @@ import AvailabilityButton from '../components/AvailabilityButton.tsx';
 import AvailabilityGrid from '../components/AvailabilityGrid.tsx';
 import AvailabilityRequest from '../entities/AvailabilityRequest.ts';
 import useAvailabilityTimeSlots from '../hooks/useAvailabilityTimeSlots.ts';
+import { useState } from 'react';
+import { AvailabilityResponse } from '../entities/AvailabilityResponse.ts';
 
 const AvailabilityTimeSlotsPage = () => {
   const { mutate } = useAvailabilityTimeSlots();
+  const [timeSlots, setTimeSlots] = useState<AvailabilityResponse>([]);
 
-  // Function to handle form submission
+  // Function to handle submission
   const handleSubmit = () => {
     const formData: AvailabilityRequest = {
       currency_code: 'USD',
@@ -74,11 +77,12 @@ const AvailabilityTimeSlotsPage = () => {
       ],
     };
 
-    console.log('Form data:', formData);
+    // console.log('Form data:', formData);
     // Add logic here to send data to the API or process it as needed
     mutate(formData, {
       onSuccess: data => {
         console.log(data);
+        setTimeSlots(data);
       },
       onError: err => {
         console.log(err);
@@ -90,7 +94,7 @@ const AvailabilityTimeSlotsPage = () => {
     <Box>
       <Heading textAlign='center'>AvailabilityTimeSlotsPage</Heading>
       <AvailabilityButton onSubmit={handleSubmit} />
-      <AvailabilityGrid />
+      <AvailabilityGrid timeSlots={timeSlots} />
     </Box>
   );
 };
