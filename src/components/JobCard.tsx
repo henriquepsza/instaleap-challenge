@@ -11,14 +11,19 @@ import JobResponse from '../entities/JobResponse.ts';
 
 interface Props {
   job: JobResponse;
+  onSelect: (job: JobResponse) => void;
 }
 
-const JobCard = ({ job }: Props) => {
+const JobCard = ({ job, onSelect }: Props) => {
   if (job === null || job === undefined)
     return <Alert bg={'red'}>No job available</Alert>;
 
+  const handleClick = () => {
+    onSelect(job);
+  };
+
   return (
-    <Box>
+    <Box onClick={handleClick} cursor='pointer'>
       <Card>
         <CardBody>
           <VStack align='start' spacing={3}>
