@@ -1,21 +1,18 @@
-// Interface para a loja (store)
 interface Store {
   id: string;
   name: string;
 }
 
-// Interface principal para a lista de itens
-interface AvailabilityTimeSlot {
+export interface AvailabilityTimeSlot {
   id: string;
-  from: string; // Data e hora de início
-  to: string; // Data e hora de término
+  from: string;
+  to: string;
   operational_model: string;
   store: Store;
   description: string;
-  expires_at: string; // Data e hora de expiração
+  expires_at: string;
 }
 
-// Interface para a lista de FallbackItems
 type AvailabilityResponse = AvailabilityTimeSlot[];
 
-export type { AvailabilityResponse };
+export default AvailabilityResponse;

@@ -4,7 +4,7 @@ import AvailabilityGrid from '../components/AvailabilityGrid.tsx';
 import AvailabilityRequest from '../entities/AvailabilityRequest.ts';
 import useAvailabilityTimeSlots from '../hooks/useAvailabilityTimeSlots.ts';
 import { useState } from 'react';
-import { AvailabilityResponse } from '../entities/AvailabilityResponse.ts';
+import AvailabilityResponse from '../entities/AvailabilityResponse.ts';
 
 const AvailabilityTimeSlotsPage = () => {
   const { mutate } = useAvailabilityTimeSlots();

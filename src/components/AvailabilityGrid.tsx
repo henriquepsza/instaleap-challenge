@@ -1,7 +1,7 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import AvailabilityCardContainer from './AvailabilityCardContainer.tsx';
 import AvailabilityCard from './AvailabilityCard.tsx';
-import { AvailabilityResponse } from '../entities/AvailabilityResponse.ts';
+import AvailabilityResponse from '../entities/AvailabilityResponse.ts';
 
 interface Props {
   timeSlots: AvailabilityResponse;

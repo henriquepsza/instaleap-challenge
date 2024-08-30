@@ -7,10 +7,10 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
-import AvailabilityResponse from '../entities/AvailabilityResponse.ts';
+import { AvailabilityTimeSlot } from '../entities/AvailabilityResponse.ts';
 
 interface Props {
-  timeSlot: AvailabilityResponse;
+  timeSlot: AvailabilityTimeSlot;
   onSelect: (id: string) => void; // Callback function to handle slot selection
 }
 
