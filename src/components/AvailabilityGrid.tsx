@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
-import AvailabilityCardContainer from './AvailabilityCardContainer.tsx';
+import CardContainer from './CardContainer.tsx';
 import AvailabilityCard from './AvailabilityCard.tsx';
 import AvailabilityResponse from '../entities/AvailabilityResponse.ts';
 
@@ -18,9 +18,9 @@ const AvailabilityGrid = ({ timeSlots, onSelect }: Props) => {
         spacing={6}
       >
         {timeSlots.map((slot, index) => (
-          <AvailabilityCardContainer key={index}>
+          <CardContainer key={index}>
             <AvailabilityCard timeSlot={slot} onSelect={onSelect} />
-          </AvailabilityCardContainer>
+          </CardContainer>
         ))}
       </SimpleGrid>
     </Box>

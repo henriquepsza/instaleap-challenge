@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
 }
 
-const AvailabilityCardContainer = ({ children }: Props) => {
+const CardContainer = ({ children }: Props) => {
   return (
     <Box
       _hover={{
@@ -20,4 +20,4 @@ const AvailabilityCardContainer = ({ children }: Props) => {
   );
 };
 
-export default AvailabilityCardContainer;
+export default CardContainer;
