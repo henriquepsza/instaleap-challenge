@@ -131,10 +131,6 @@ const JobDetailDrawer = ({ job, isOpen, onClose }: Props) => {
                     Payment Information
                   </Text>
                   <Text fontSize={'md'}>
-                    Amount: {job.payment_info.payment.value}{' '}
-                    {job.payment_info.currency_code}
-                  </Text>
-                  <Text fontSize={'md'}>
                     Method: {job.payment_info.payment.method}
                   </Text>
                   <Text fontSize={'md'}>
@@ -146,11 +142,39 @@ const JobDetailDrawer = ({ job, isOpen, onClose }: Props) => {
                   <Text fontSize={'md'}>
                     Reference: {job.payment_info.payment.reference}
                   </Text>
+                  <Text fontSize={'md'}>
+                    Amount: {job.payment_info.payment.value}{' '}
+                    {job.payment_info.currency_code}
+                  </Text>
                   {job.payment_info.invoice?.reference && (
                     <Text fontSize={'md'}>
                       Invoice Reference: {job.payment_info.invoice.reference}
                     </Text>
                   )}
+                  <Divider />
+                  <Text fontSize={'lg'} fontWeight={'bold'}>
+                    Price Breakdown
+                  </Text>
+                  <Text fontSize={'md'}>
+                    Order Value: {job.payment_info.prices.order_value}{' '}
+                    {job.payment_info.currency_code}
+                  </Text>
+                  <Text fontSize={'md'}>
+                    Subtotal: {job.payment_info.prices.subtotal}{' '}
+                    {job.payment_info.currency_code}
+                  </Text>
+                  <Text fontSize={'md'}>
+                    Shipping Fee: {job.payment_info.prices.shipping_fee}{' '}
+                    {job.payment_info.currency_code}
+                  </Text>
+                  <Text fontSize={'md'}>
+                    Taxes: {job.payment_info.prices.taxes}{' '}
+                    {job.payment_info.currency_code}
+                  </Text>
+                  <Text fontSize={'md'}>
+                    Discounts: {job.payment_info.prices.discounts}{' '}
+                    {job.payment_info.currency_code}
+                  </Text>
                 </Stack>
               </Box>
             )}
