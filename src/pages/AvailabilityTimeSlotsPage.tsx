@@ -94,10 +94,12 @@ const AvailabilityTimeSlotsPage = () => {
     });
   };
 
+  const generateClientReference = () => `Order${Date.now()}`;
+
   const handleSelectSlot = (id: string) => {
     const jobRequest = {
       slot_id: id,
-      client_reference: 'Order12345',
+      client_reference: generateClientReference(),
       recipient: {
         name: 'Jane Smith',
         email: 'jane.smith@example.com',
