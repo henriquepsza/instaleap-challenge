@@ -18,6 +18,11 @@ const JobsPage = () => {
     setSelectedJob(job);
   };
 
+  const handleBill = (job: JobResponse, amount: number) => {
+    // job.payment_info?.prices.order_value = amount;
+    console.log(job);
+  };
+
   if (isLoading) return <Spinner />;
 
   if (error) return <Alert>{error.message}</Alert>;
@@ -32,7 +37,13 @@ const JobsPage = () => {
       )}
       <GenericGrid>
         <CardContainer>
-          {data && <JobCard job={data} onSelect={handleSelectJob} />}
+          {data && (
+            <JobCard
+              job={data}
+              onSelect={handleSelectJob}
+              onBill={handleBill}
+            />
+          )}
         </CardContainer>
       </GenericGrid>
 

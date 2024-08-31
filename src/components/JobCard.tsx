@@ -6,24 +6,55 @@ import {
   Heading,
   Text,
   VStack,
+  Button,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Input,
+  useToast,
+  HStack,
 } from '@chakra-ui/react';
 import JobResponse from '../entities/JobResponse.ts';
+import { useState } from 'react';
 
 interface Props {
   job: JobResponse;
   onSelect: (job: JobResponse) => void;
+  onBill: (job: JobResponse, amount: number) => void; // New prop for billing action
 }
 
-const JobCard = ({ job, onSelect }: Props) => {
+const JobCard = ({ job, onSelect, onBill }: Props) => {
   if (job === null || job === undefined)
     return <Alert bg={'red'}>No job available</Alert>;
 
-  const handleClick = () => {
-    onSelect(job);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [billingAmount, setBillingAmount] = useState(
+    job.payment_info?.prices.order_value || 0
+  );
+  const toast = useToast();
+
+  const handleBilling = () => {
+    onOpen();
+  };
+
+  const handleConfirmBilling = () => {
+    onBill(job, billingAmount);
+    // toast({
+    //   title: 'Billing processed.',
+    //   description: `Billing of $${billingAmount.toFixed(2)} was processed successfully.`,
+    //   status: 'success',
+    //   duration: 5000,
+    //   isClosable: true,
+    // });
+    onClose();
   };
 
   return (
-    <Box onClick={handleClick} cursor='pointer'>
+    <Box>
       <Card>
         <CardBody>
           <VStack alignItems='start' spacing={3}>
@@ -36,9 +67,41 @@ const JobCard = ({ job, onSelect }: Props) => {
             <Text fontSize={'sm'}>
               End: {new Date(job.end_time).toLocaleString()}
             </Text>
+            <HStack>
+              <Button colorScheme='blue' onClick={handleBilling}>
+                Bill
+              </Button>
+              <Button colorScheme='blue' onClick={() => onSelect(job)}>
+                Details
+              </Button>
+            </HStack>
           </VStack>
         </CardBody>
       </Card>
+
+      {/* Billing Confirmation Modal */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Confirm Billing</ModalHeader>
+          <ModalBody>
+            <Text>Enter the amount to bill:</Text>
+            <Input
+              type='number'
+              value={billingAmount}
+              onChange={e => setBillingAmount(parseFloat(e.target.value))}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme='gray' onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme='teal' ml={3} onClick={handleConfirmBilling}>
+              Confirm
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };
