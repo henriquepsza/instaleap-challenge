@@ -1,50 +1,96 @@
-# React + TypeScript + Vite
+### **Instaleap Challenge - Project Overview**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project was developed to integrate with the Instaleap API, enabling a grocery store in Uganda, TongoMart, to offer precise delivery times to its customers and organize the work of pickers and drivers in stores. The main goal of this project is to build a platform that interacts with Instaleap's logistics platform following the requirements provided in the challenge.
 
-Currently, two official plugins are available:
+### **Project Features**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Introduction Screen**:
+    - The application starts with an introductory screen where the user can initiate the availability check process by clicking a button.
+    - This action triggers a request to the Instaleap Availability API to retrieve available time slots.
 
-## Expanding the ESLint configuration
+2. **Availability Check**:
+    - The application displays the available time slots for delivery or pickup, initially using mock data.
+    - Once a time slot is selected, the interface allows for creating a new job (order) using Instaleap's API.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. **Job Creation and Visualization**:
+    - After creating a job, the application fetches the job details using the "Get job by id" endpoint from the Instaleap API and displays them to the user.
 
-- Configure the top-level `parserOptions` property like this:
+4. **Billing Process**:
+    - The application includes a field where the user can enter an amount and a button to process the billing (payment) using the job's details.
+    - The payment status is then updated according to the API's response.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+### **Project Setup and Execution**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+To set up and run the project locally, follow the instructions below:
 
-```js
-// eslint.config.cjs
-import react from 'eslint-plugin-react';
+#### **Prerequisites**
+- Ensure you have Node.js and npm installed on your machine.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
-```
+#### **Installation**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/instaleap-challenge.git
+   cd instaleap-challenge
+   ```
+
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+#### **Scripts**
+
+The project includes several npm scripts to streamline development:
+
+- **`dev`**: Starts the development server using Vite.
+  ```bash
+  npm run dev
+  ```
+
+- **`build`**: Compiles TypeScript and builds the project for production.
+  ```bash
+  npm run build
+  ```
+
+- **`lint`**: Lints the project using ESLint to ensure code quality.
+  ```bash
+  npm run lint
+  ```
+
+- **`preview`**: Serves the production build locally to preview the application.
+  ```bash
+  npm run preview
+  ```
+
+- **`json-server`**: Starts a JSON Server to simulate a backend server and serves the `db.json` file, which contains the job IDs created during the application flow.
+  ```bash
+  npm run json-server
+  ```
+
+#### **Running the Project**
+
+1. Start the JSON Server (in a separate terminal window):
+   ```bash
+   npm run json-server
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open your browser and navigate to `http://localhost:5173` to interact with the application.
+
+### **Usage**
+
+1. On the introduction screen, click the button to initiate the availability check.
+2. Select a time slot from the displayed options.
+3. Create a job using the selected time slot.
+4. View the job details and proceed to billing if needed.
+
+### **Conclusion**
+
+This project demonstrates the integration with the Instaleap API, covering the key steps required to create and manage jobs and payments through the platform. By following the provided instructions, you should be able to run and explore the project locally.
+
+Feel free to reach out if you have any questions or issues setting up the project.
