@@ -1,4 +1,4 @@
-import { Alert, Box, Heading, Spinner, Text } from '@chakra-ui/react';
+import { Alert, Box, Heading, Spinner, Text, useToast } from '@chakra-ui/react';
 import GenericGrid from '../components/GenericGrid.tsx';
 import CardContainer from '../components/CardContainer.tsx';
 import JobCard from '../components/JobCard.tsx';
@@ -16,6 +16,7 @@ const JobsPage = () => {
 
   const [selectedJob, setSelectedJob] = useState<JobResponse | null>(null);
   const { mutate: updateJob } = useUpdateJob();
+  const toast = useToast();
 
   const handleSelectJob = (job: JobResponse) => {
     setSelectedJob(job);
@@ -49,7 +50,25 @@ const JobsPage = () => {
       },
     };
 
-    // updateJob({ id: job.id, request: updatedJob });
+    updateJob(
+      { id: job.id, request: updatedJob },
+      {
+        onSuccess: data => {
+          console.log(data);
+          toast({
+            title: 'Billing processed.',
+            description: `Billing of $${updatedJob.payment.value.toFixed(2)} was processed successfully.`,
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          });
+        },
+        onError: err => {
+          console.log(err);
+        },
+      }
+    );
+
     console.log(updatedJob);
   };
 

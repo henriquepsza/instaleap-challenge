@@ -6,8 +6,12 @@ import UpdateJobResponse from '../entities/UpdateJobResponse.ts';
 const apiClient = new APIClient<UpdateJobRequest, UpdateJobResponse>('/jobs');
 
 const useUpdateJob = () => {
-  return useMutation<UpdateJobResponse, Error, UpdateJobRequest>({
-    mutationFn: ({ id, request }: { id: string; request: any }) =>
+  return useMutation<
+    UpdateJobResponse,
+    Error,
+    { id: string; request: UpdateJobRequest }
+  >({
+    mutationFn: ({ id, request }: { id: string; request: UpdateJobRequest }) =>
       apiClient.put(request, undefined, `/jobs/${id}/payment_info`),
     onSuccess: response => {
       return response;

@@ -15,7 +15,6 @@ import {
   ModalBody,
   ModalFooter,
   Input,
-  useToast,
   HStack,
 } from '@chakra-ui/react';
 import JobResponse from '../entities/JobResponse.ts';
@@ -35,7 +34,6 @@ const JobCard = ({ job, onSelect, onBill }: Props) => {
   const [billingAmount, setBillingAmount] = useState(
     job.payment_info?.prices.order_value || 0
   );
-  const toast = useToast();
 
   const handleBilling = () => {
     onOpen();
@@ -43,13 +41,7 @@ const JobCard = ({ job, onSelect, onBill }: Props) => {
 
   const handleConfirmBilling = () => {
     onBill(job, billingAmount);
-    // toast({
-    //   title: 'Billing processed.',
-    //   description: `Billing of $${billingAmount.toFixed(2)} was processed successfully.`,
-    //   status: 'success',
-    //   duration: 5000,
-    //   isClosable: true,
-    // });
+
     onClose();
   };
 

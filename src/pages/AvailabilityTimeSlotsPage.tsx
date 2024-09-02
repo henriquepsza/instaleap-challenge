@@ -124,14 +124,14 @@ const AvailabilityTimeSlotsPage = () => {
 
     console.log('jobRequest:', jobRequest);
 
-    // addJob(jobRequest, {
-    //   onSuccess: data => {
-    //     console.log(data);
-    //   },
-    //   onError: err => {
-    //     console.log(err);
-    //   },
-    // });
+    addJob(jobRequest, {
+      onSuccess: data => {
+        console.log(data);
+      },
+      onError: err => {
+        console.log(err);
+      },
+    });
   };
 
   return (
