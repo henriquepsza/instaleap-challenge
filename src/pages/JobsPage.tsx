@@ -7,6 +7,7 @@ import { useState } from 'react';
 import JobResponse from '../entities/JobResponse.ts';
 import JobDetailDrawer from '../components/JobDetailDrawer.tsx';
 import useUpdateJob from '../hooks/useUpdateJob.ts';
+import UpdateJobRequest from '../entities/UpdateJobRequest.ts';
 
 const JobsPage = () => {
   const { data, isLoading, error } = useJob(
@@ -22,23 +23,32 @@ const JobsPage = () => {
 
   const handleBill = (job: JobResponse, amount: number) => {
     // Update the prices object with the new amount
-    const updatedJob = {
-      ...job,
-      payment_info: {
-        ...job.payment_info,
-        prices: {
-          ...job.payment_info?.prices,
-          order_value: amount,
-          subtotal: amount - (job.payment_info?.prices?.shipping_fee || 0),
-        },
-        payment: {
-          ...job.payment_info?.payment,
-          value: amount,
-        },
+    const updatedJob: UpdateJobRequest = {
+      prices: {
+        subtotal: amount - (job.payment_info?.prices?.shipping_fee || 0),
+        shipping_fee: job.payment_info?.prices?.shipping_fee || 0,
+        discounts: job.payment_info?.prices?.discounts || 0,
+        taxes: job.payment_info?.prices?.taxes || 0,
+        order_value: amount,
+        attributes: job.payment_info?.prices?.attributes || [],
+      },
+      payment: {
+        payment_status: job.payment_info?.payment?.payment_status || '',
+        method: job.payment_info?.payment?.method || '',
+        id: job.payment_info?.payment?.id || '',
+        reference: job.payment_info?.payment?.reference || '',
+        value: amount,
+        payment_status_details:
+          job.payment_info?.payment?.payment_status_details || '',
+        method_details: job.payment_info?.payment?.method_details || '',
+        blocking_policy: job.payment_info?.payment?.blocking_policy || '',
+      },
+      invoice: {
+        reference: job.payment_info?.invoice?.reference || '',
+        attachments: job.payment_info?.invoice?.attachments || [],
       },
     };
 
-    // Log the updated job for debugging
     // updateJob({ id: job.id, request: updatedJob });
     console.log(updatedJob);
   };
