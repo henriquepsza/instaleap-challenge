@@ -30,7 +30,7 @@ To set up and run the project locally, follow the instructions below:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/instaleap-challenge.git
+   git clone https://github.com/henriquepsza/instaleap-challenge
    cd instaleap-challenge
    ```
 
@@ -88,6 +88,50 @@ The project includes several npm scripts to streamline development:
 2. Select a time slot from the displayed options.
 3. Create a job using the selected time slot.
 4. View the job details and proceed to billing if needed.
+
+### **Installed Packages Overview**
+
+This section provides an overview of the key packages installed in the project, detailing their purpose and how they contribute to the overall functionality of the application.
+
+#### **1. React & React-DOM**
+- **Purpose**: Core libraries for building the user interface of the application.
+- **Usage**: React is used to create components, manage state, and render the UI. React-DOM is responsible for rendering React components in the DOM.
+
+#### **2. Vite**
+- **Purpose**: A fast build tool and development server.
+- **Usage**: Vite is used for local development, offering a lightning-fast development environment with support for hot module replacement (HMR).
+
+#### **3. TypeScript**
+- **Purpose**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Usage**: TypeScript is used throughout the project to ensure type safety and improve code quality. It helps catch errors during development, making the codebase more maintainable.
+
+#### **4. Chakra UI**
+- **Purpose**: A simple, modular, and accessible component library for React.
+- **Usage**: Chakra UI is used for building the UI of the application, providing pre-designed components like buttons, modals, grids, and more, which are customizable and responsive by default.
+
+#### **5. @tanstack/react-query**
+- **Purpose**: A powerful data-fetching and state-management library for React.
+- **Usage**: React Query is used to handle API requests and manage server state. It simplifies data fetching, caching, synchronization, and more, ensuring efficient and maintainable data flows in the application.
+
+#### **6. JSON Server**
+- **Purpose**: A simple, full fake REST API server.
+- **Usage**: JSON Server is used to simulate a backend for storing job IDs created during the application flow. It allows for quick prototyping and testing of API interactions without the need for a fully-fledged backend.
+
+#### **7. Axios**
+- **Purpose**: A promise-based HTTP client for the browser and Node.js.
+- **Usage**: Axios is used to make HTTP requests to the Instaleap API and the local JSON Server. It simplifies the process of sending asynchronous requests and handling responses.
+
+#### **8. ESLint**
+- **Purpose**: A static code analysis tool for identifying problematic patterns in JavaScript and TypeScript code.
+- **Usage**: ESLint is configured to enforce coding standards and best practices in the project, helping to maintain a consistent and error-free codebase.
+
+#### **9. Prettier**
+- **Purpose**: An opinionated code formatter.
+- **Usage**: Prettier is used to automatically format code according to a consistent style, making the codebase cleaner and more readable.
+
+#### **10. React Icons**
+- **Purpose**: A popular icon library for React.
+- **Usage**: React Icons is used to include a variety of icons throughout the application, enhancing the UI with visual elements.
 
 ### **Conclusion**
 
