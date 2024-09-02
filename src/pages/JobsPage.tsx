@@ -8,11 +8,16 @@ import JobResponse from '../entities/JobResponse.ts';
 import JobDetailDrawer from '../components/JobDetailDrawer.tsx';
 import useUpdateJob from '../hooks/useUpdateJob.ts';
 import UpdateJobRequest from '../entities/UpdateJobRequest.ts';
+import JSONServerClient from '../services/api-client-json-server.ts';
+
+const jobIdClient = new JSONServerClient<null, { id: string }>('jobIds');
 
 const JobsPage = () => {
   const { data, isLoading, error } = useJob(
     'c78b1fd1-bdf9-48f8-8f2a-b73c1e7b6d68'
   );
+
+  jobIdClient.getAll().then(data => console.log('JOBS: ', data));
 
   const [selectedJob, setSelectedJob] = useState<JobResponse | null>(null);
   const { mutate: updateJob } = useUpdateJob();
@@ -54,17 +59,24 @@ const JobsPage = () => {
       { id: job.id, request: updatedJob },
       {
         onSuccess: data => {
-          console.log(data);
+          // console.log(data);
           toast({
             title: 'Billing processed.',
-            description: `Billing of $${updatedJob.payment.value.toFixed(2)} was processed successfully.`,
+            description: `Billing of $${data.payment.value.toFixed(2)} was processed successfully.`,
             status: 'success',
             duration: 5000,
             isClosable: true,
           });
         },
         onError: err => {
-          console.log(err);
+          // console.log(err);
+          toast({
+            title: 'Error.',
+            description: err.message,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
         },
       }
     );

@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, useToast } from '@chakra-ui/react';
 import AvailabilityButton from '../components/AvailabilityButton.tsx';
 import GenericGrid from '../components/GenericGrid.tsx';
 import AvailabilityRequest from '../entities/AvailabilityRequest.ts';
@@ -8,11 +8,17 @@ import AvailabilityResponse from '../entities/AvailabilityResponse.ts';
 import useAddJob from '../hooks/useAddJob.ts';
 import CardContainer from '../components/CardContainer.tsx';
 import AvailabilityCard from '../components/AvailabilityCard.tsx';
+import JSONServerClient from '../services/api-client-json-server.ts';
+
+const jobIdClient = new JSONServerClient<{ id: string }, { id: string }>(
+  'jobIds'
+);
 
 const AvailabilityTimeSlotsPage = () => {
   const { mutate: getTimeSlots } = useAvailabilityTimeSlots();
   const [timeSlots, setTimeSlots] = useState<AvailabilityResponse>([]);
   const { mutate: addJob } = useAddJob();
+  const toast = useToast();
 
   // Function to handle submission
   const handleSubmit = () => {
@@ -85,11 +91,18 @@ const AvailabilityTimeSlotsPage = () => {
     // Add logic here to send data to the API or process it as needed
     getTimeSlots(formData, {
       onSuccess: data => {
-        console.log(data);
+        // console.log(data);
         setTimeSlots(data);
       },
       onError: err => {
-        console.log(err);
+        // console.log(err);
+        toast({
+          title: 'Error.',
+          description: err.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
       },
     });
   };
@@ -127,9 +140,24 @@ const AvailabilityTimeSlotsPage = () => {
     addJob(jobRequest, {
       onSuccess: data => {
         console.log(data);
+        jobIdClient.post({ id: data.job_id }).then(data => console.log(data));
+        toast({
+          title: 'Job created.',
+          description: `Job was created successfully.`,
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
       },
       onError: err => {
-        console.log(err);
+        // console.log(err);
+        toast({
+          title: 'Error.',
+          description: err.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
       },
     });
   };
