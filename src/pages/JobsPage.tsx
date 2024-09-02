@@ -19,8 +19,25 @@ const JobsPage = () => {
   };
 
   const handleBill = (job: JobResponse, amount: number) => {
-    // job.payment_info?.prices.order_value = amount;
-    console.log(job);
+    // Update the prices object with the new amount
+    const updatedJob = {
+      ...job,
+      payment_info: {
+        ...job.payment_info,
+        prices: {
+          ...job.payment_info?.prices,
+          order_value: amount,
+          subtotal: amount - (job.payment_info?.prices?.shipping_fee || 0),
+        },
+        payment: {
+          ...job.payment_info?.payment,
+          value: amount,
+        },
+      },
+    };
+
+    // Log the updated job for debugging
+    console.log(updatedJob);
   };
 
   if (isLoading) return <Spinner />;
