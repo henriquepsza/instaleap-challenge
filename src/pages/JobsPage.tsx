@@ -6,6 +6,7 @@ import useJob from '../hooks/useJob.ts';
 import { useState } from 'react';
 import JobResponse from '../entities/JobResponse.ts';
 import JobDetailDrawer from '../components/JobDetailDrawer.tsx';
+import useUpdateJob from '../hooks/useUpdateJob.ts';
 
 const JobsPage = () => {
   const { data, isLoading, error } = useJob(
@@ -13,6 +14,7 @@ const JobsPage = () => {
   );
 
   const [selectedJob, setSelectedJob] = useState<JobResponse | null>(null);
+  const { mutate: updateJob } = useUpdateJob();
 
   const handleSelectJob = (job: JobResponse) => {
     setSelectedJob(job);
@@ -37,6 +39,7 @@ const JobsPage = () => {
     };
 
     // Log the updated job for debugging
+    // updateJob({ id: job.id, request: updatedJob });
     console.log(updatedJob);
   };
 

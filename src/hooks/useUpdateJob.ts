@@ -1,11 +1,12 @@
 import APIClient from '../services/api-client.ts';
 import { useMutation } from '@tanstack/react-query';
 
-const apiClient = new APIClient('/jobs/{jobId}/payment_info');
+const apiClient = new APIClient('/jobs');
 
-const useUpdateJob = (id: string) => {
+const useUpdateJob = () => {
   return useMutation({
-    mutationFn: request => apiClient.put(id, request),
+    mutationFn: ({ id, request }: { id: string; request: any }) =>
+      apiClient.put(request, undefined, `/jobs/${id}/payment_info`),
     onSuccess: response => {
       return response;
     },

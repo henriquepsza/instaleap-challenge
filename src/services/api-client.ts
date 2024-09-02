@@ -43,15 +43,13 @@ class APIClient<TRequest, TResponse> {
 
   // PUT method to update a record by ID
   put = async (
-    id: number | string,
     data: TRequest,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
+    customEndpoint?: string
   ) => {
-    const res = await axiosInstance.put<TResponse>(
-      `${this.endpoint}/${id}`,
-      data,
-      config
-    );
+    console.log('URL: ', this.endpoint);
+    const url = customEndpoint || this.endpoint;
+    const res = await axiosInstance.put<TResponse>(url, data, config);
     return res.data;
   };
 
