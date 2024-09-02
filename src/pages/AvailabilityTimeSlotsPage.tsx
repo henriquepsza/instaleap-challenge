@@ -24,8 +24,8 @@ const AvailabilityTimeSlotsPage = () => {
   const handleSubmit = () => {
     const formData: AvailabilityRequest = {
       currency_code: 'USD',
-      start: '2024-09-01T08:00:00Z',
-      end: '2024-09-08T08:00:00Z',
+      start: '2024-09-10T08:00:00Z',
+      end: '2024-09-15T08:00:00Z',
       slot_size: 60,
       minimum_slot_size: 15,
       operational_models_priority: ['FULL_SERVICE'],
