@@ -1,13 +1,20 @@
 import APIClient from '../services/api-client.ts';
 import { useQuery } from '@tanstack/react-query';
 import JobResponse from '../entities/JobResponse.ts';
+import JSONServerClient from '../services/api-client-json-server.ts';
 
-const apiCliente = new APIClient<null, JobResponse>('/jobs');
+const apiClient = new APIClient<null, JobResponse>('/jobs');
+const jobIdClient = new JSONServerClient<null, { id: string }>('jobIds');
 
-const useJob = (id: string) => {
+const useJob = () => {
   return useQuery({
-    queryKey: ['job', id],
-    queryFn: () => apiCliente.get(id),
+    queryKey: ['jobs'],
+    queryFn: async () => {
+      const jobIdsResponse = await jobIdClient.getAll();
+      const jobIds = jobIdsResponse.map(job => job.id);
+
+      return await Promise.all(jobIds.map(id => apiClient.get(id)));
+    },
   });
 };
 

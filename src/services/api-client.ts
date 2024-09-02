@@ -47,7 +47,6 @@ class APIClient<TRequest, TResponse> {
     config?: AxiosRequestConfig,
     customEndpoint?: string
   ) => {
-    console.log('URL: ', this.endpoint);
     const url = customEndpoint || this.endpoint;
     const res = await axiosInstance.put<TResponse>(url, data, config);
     return res.data;
